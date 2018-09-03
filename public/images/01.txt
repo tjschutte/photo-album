@@ -1,0 +1,11 @@
+<h1 class="text-center">How to use</h1>
+
+Upload images. Create a text file for each image / video with the exact same name and '.txt' 
+as the file type. Create a new folder to create a link. Create folders in folders to create a nested structure.
+<br>
+<br>
+You can use html tags if you're in to that sort of thing as well.
+
+<p style="font-family: times, serif; font-size:14pt; font-style:italic">
+Sample text formatted with inline CSS.
+</p>

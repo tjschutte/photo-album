@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <title>Photo Album</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+            <a class="navbar-brand" href="/">Home</a>
+            <ul class="navbar-nav">
+                <!-- If there are dirs, show links to them here. -->
+                <% if (dirs.length > 0) {%>
+                    <% for (var i = 0; i < dirs.length; i++) { %>
+                        <% if (file_path.length > 1) { %>
+                            <li class="nav-item"><a class="nav-link" href='<%= file_path%>/<%= dirs[i] %>'><%= dirs[i] %></a></li>
+                        <% } else { %>
+                            <li class="nav-item"><a class="nav-link" href='<%= dirs[i] %>'><%= dirs[i] %></a></li>
+                        <% } %>
+                    <% } %>
+                <% } %>
+            </ul>
+        </nav>
+        <br>
+        <br>
+        <!-- If there are videos, show them and any text here. -->
+        <% if (videos.length > 0) {%>
+            <% for (var i = 0; i < videos.length; i++) { %>
+                <div class="row text-left">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-4">
+                        <video class="img-fluid" controls>
+                            <source src='/images/<%= file_path%>/<%= videos[i].file %>' type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="col-sm-4">
+                        <% if (videos[i].text) {%>
+                            <p>
+                                <%- videos[i].text %>
+                            </p>
+                        <% } %>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                </div>
+                <br>
+            <% } %>
+        <% } %>
+        <!-- If there are images, show them and any text here. -->
+        <% if (images.length > 0) {%>
+            <% for (var i = 0; i < images.length; i++) { %>
+                <div class="row text-left">
+                    <div class="col-sm-2" ></div>
+                    <!-- Image on left when even-->
+                    <% if (i % 2 == 0) {%>
+                        <div class="col-sm-4">
+                            <img class="rounded img-fluid" src='/images/<%= file_path%>/<%= images[i].file %>' />
+                        </div>
+                        <div class="col-sm-4">
+                            <% if (images[i].text) {%>
+                                <p>
+                                    <%- images[i].text %>
+                                </p>
+                            <% } %>
+                        </div>
+                    <% } else { %>
+                        <!-- image on right when odd -->
+                        <div class="col-sm-4">
+                            <% if (images[i].text) {%>
+                                <p>
+                                    <%- images[i].text %>
+                                </p>
+                            <% } %>
+                        </div>
+                        <div class="col-sm-4">
+                            <img class="rounded img-fluid" src='/images/<%= file_path%>/<%= images[i].file %>' />
+                        </div>
+                    <% } %>
+                    <div class="col-sm-2">
+                    </div>
+                </div>    
+                <br>
+            <% } %>
+        <% } %>
+        <% if (images.length == 0 && videos.length == 0) {%>
+        <br>
+        <br>
+        <div class="text-center" >
+            <h4>
+                Should probably click one of the links above friend.
+            </h4>
+        </div>
+        <% } %>
+    </body>
+</html>
